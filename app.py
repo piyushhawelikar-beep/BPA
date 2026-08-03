@@ -51,13 +51,19 @@ def load_models():
     return lr_model, vectorizer, lstm_model, tokenizer, label_encoder
 
 @st.cache_data
+import os
+
+@st.cache_data
 def load_sample_tweets():
-    df = pd.read_csv("data/cleaned_tweets.csv")
-    return df.dropna(subset=['clean_text'])
+    if os.path.exists("data/cleaned_tweets.csv"):
+        df = pd.read_csv("data/cleaned_tweets.csv")
+    elif os.path.exists("cleaned_tweets.csv"):
+        df = pd.read_csv("cleaned_tweets.csv")
+    else:
+        st.error("cleaned_tweets.csv file not found.")
+        st.stop()
 
-lr_model, vectorizer, lstm_model, tokenizer, label_encoder = load_models()
-sample_df = load_sample_tweets()
-
+    return df.dropna(subset=["clean_text"])
 # -------------------------------
 # Prediction functions
 # -------------------------------
