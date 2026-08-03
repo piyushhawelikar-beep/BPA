@@ -7,29 +7,28 @@ import numpy as np
 import pandas as pd
 from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
-import nltk
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 # -------------------------------
 # NLTK setup
 # -------------------------------
-nltk.download('stopwords', quiet=True)
-nltk.download('wordnet', quiet=True)
-stop_words = set(stopwords.words('english'))
-lemmatizer = WordNetLemmatizer()
+stop_words = {
+    "a","an","the","is","are","am","was","were","be","been","being",
+    "to","of","in","on","at","for","with","and","or","but","if","then",
+    "this","that","it","its","as","by","from","you","your","i","me","my"
+}
 
 def clean_tweet(text):
     text = text.lower()
-    text = re.sub(r'http\S+|www\S+', '', text)
-    text = re.sub(r'@\w+', '', text)
-    text = re.sub(r'#\w+', '', text)
-    text = re.sub(r'[^a-z\s]', '', text)
-    words = [lemmatizer.lemmatize(w) for w in text.split() if w not in stop_words]
-    return ' '.join(words)
+    text = re.sub(r"http\\S+|www\\S+", "", text)
+    text = re.sub(r"@\\w+", "", text)
+    text = re.sub(r"#\\w+", "", text)
+    text = re.sub(r"[^a-z\\s]", "", text)
 
+    words = [w for w in text.split() if w not in stop_words]
+
+    return " ".join(words)
 # -------------------------------
 # Page config
 # -------------------------------
