@@ -55,8 +55,8 @@ import os
 
 @st.cache_data
 def load_sample_tweets():
-    if os.path.exists("data/cleaned_tweets.csv"):
-        df = pd.read_csv("data/cleaned_tweets.csv")
+    if os.path.exists("cleaned_tweets.csv"):
+        df = pd.read_csv("cleaned_tweets.csv")
     elif os.path.exists("cleaned_tweets.csv"):
         df = pd.read_csv("cleaned_tweets.csv")
     else:
