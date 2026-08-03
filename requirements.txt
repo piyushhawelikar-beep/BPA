@@ -3,7 +3,8 @@ pandas
 numpy<2
 scikit-learn
 joblib
-nltk
 matplotlib
+nltk
+regex
 tensorflow==2.15.1
 h5py
