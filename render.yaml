@@ -1,8 +1,8 @@
-services:
-  - type: web
-    name: BPA
-    env: python
-    plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: streamlit run app.py --server.port=$PORT --server.address=0.0.0.0
-    envVars: []
+streamlit
+pandas
+numpy<2
+scikit-learn
+joblib
+matplotlib
+tensorflow==2.15.1
+h5py
