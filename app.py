@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import joblib
 import pickle
@@ -8,7 +9,6 @@ import pandas as pd
 from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 from keras.models import load_model
-from keras.utils import pad_sequences
 from keras.preprocessing.sequence import pad_sequences
 
 # -------------------------------
@@ -49,20 +49,20 @@ def load_models():
     with open("label_encoder.pkl", "rb") as f:
         label_encoder = pickle.load(f)
     return lr_model, vectorizer, lstm_model, tokenizer, label_encoder
-
-import os
+    
 
 @st.cache_data
 def load_sample_tweets():
     if os.path.exists("cleaned_tweets.csv"):
-        df = pd.read_csv("cleaned_tweets.csv")
-    elif os.path.exists("cleaned_tweets.csv"):
         df = pd.read_csv("cleaned_tweets.csv")
     else:
         st.error("cleaned_tweets.csv file not found.")
         st.stop()
 
     return df.dropna(subset=["clean_text"])
+     lr_model, vectorizer, lstm_model, tokenizer, label_encoder = load_models()
+sample_df = load_sample_tweets()
+   
 # -------------------------------
 # Prediction functions
 # -------------------------------
