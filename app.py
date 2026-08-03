@@ -50,7 +50,6 @@ def load_models():
         label_encoder = pickle.load(f)
     return lr_model, vectorizer, lstm_model, tokenizer, label_encoder
 
-@st.cache_data
 import os
 
 @st.cache_data
